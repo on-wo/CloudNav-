@@ -68,54 +68,63 @@
 
 ## 🚀 部署教程 (免费)
 
-只需拥有 GitHub 账号，即可在 5 分钟内完成部署。
+本应用完全基于 **Cloudflare Pages** + **KV** 构建，无需服务器，永久免费。
 
-### 第一步：Fork 项目
-1. 点击本项目页面右上角的 **Fork** 按钮。
-2. 将仓库复制到您自己的 GitHub 账号下。
+> **📥 [点击下载完整图文教程 (.docx)](图文教程.docx)**
 
-### 第二步：创建 Cloudflare Pages
-1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)。
-2. 导航至 **Workers & Pages** -> **Overview**。
-3. 点击 **Create application** -> **Pages** -> **Connect to Git**。
-4. 选择刚才 Fork 的仓库 `CloudNav-`。
-5. **配置构建参数 (关键)**:
-    *   **Project name**: 随意填写 (如 `CloudNav-`)。
-    *   **Production branch**: `main` (或 `master`)。
-    *   **Framework preset**: **None (不选 / 空)**。
-    *   **Build command**: `npm run build`。
-    *   **Build output directory**: `dist`。
-6. 点击 **Save and Deploy**。
+### 📋 简明部署步骤 (适合有经验用户)
 
-### 第三步：创建并绑定数据库 (KV)
-1. 部署完成后（首次可能报错，请忽略），回到 Cloudflare 的 **Workers & Pages** 主页。
-2. 点击左侧菜单 **KV**。
-3. 点击 **Create a Namespace**，输入名称 `CLOUDNAV_DB`，点击 Add。
-4. 回到您的 Pages 项目页面 -> **Settings** -> **Functions**。
-5. 找到 **KV Namespace Bindings** 区域，点击 **Add binding**。
-    *   **Variable name**: 必须填 `CLOUDNAV_KV`。
-    *   **KV Namespace**: 选择刚才创建的 `CLOUDNAV_DB`。
-6. 点击 **Save**。
+1.  **Fork 项目**: 点击右上角 Fork 按钮，将本项目克隆到您的 GitHub 账号。
+2.  **创建 Pages 应用**: 登录 Cloudflare Dashboard -> Workers & Pages -> 创建应用程序 -> Pages -> 连接到 Git -> 选择 `CloudNav-`。
+3.  **配置构建**:
+    *   框架预设: **无 (None)**
+    *   构建命令: `npm run build`
+    *   输出目录: `dist`
+4.  **创建数据库**: 在 Workers & Pages -> KV 中创建一个新的命名空间，命名为 `CLOUDNAV_DB`。
+5.  **绑定变量**:
+    *   进入 Pages 项目设置 -> 绑定 (Bindings) -> 添加 KV 命名空间 -> 变量名填 `CLOUDNAV_KV`，值选择刚才创建的 `CLOUDNAV_DB`。
+    *   进入 环境变量 (Environment variables) -> 添加变量 `PASSWORD`，值为您的访问密码。
+6.  **部署**: 重新部署项目即可。
 
-### 第四步：设置访问密码
-1. 在 Pages 项目页面 -> **Settings** -> **Environment variables**。
-2. 点击 **Add variables**，添加以下变量：
-    *   **Variable name**: `PASSWORD`
-    *   **Value**: 设置您的全局访问密码 (例如 `88888888`)。
-3. 点击 **Save**。
+---
 
-### 第五步：重试部署
-1. 配置完 KV 和环境变量后，必须重新部署才能生效。
-2. 点击顶部 **Deployments** 标签。
-3. 找到最新的一次部署记录，点击右侧的三个点 **...** -> **Retry deployment**。
-4. 等待部署成功（状态变为 Success），点击生成的 `*.pages.dev` 链接即可访问。
+### 📖 保姆级图文教程 (适合新手)
 
-### 第六步：绑定自定义域名 (可选)
-1. 在 Cloudflare Pages 项目页面，点击顶部的 **Custom domains** 标签。
-2. 点击 **Set up a custom domain**。
-3. 输入您拥有的域名（例如 `nav.example.com`），点击 **Continue**。
-4. 按照提示完成 DNS 解析配置（Cloudflare 会自动添加 CNAME 记录）。
-5. 等待几分钟，即可通过您的自定义域名访问云航，享受更专业的访问体验。
+> 如果您是第一次使用 Cloudflare，请严格按照以下步骤操作。
+
+#### 第一步：点击创建应用程序
+![第一步](1.png)
+
+#### 第二步：点击右下角 Get started
+![第二步](2.png)
+
+#### 第三步：导入现有你已经 fork 的仓库
+![第三步](3.png)
+
+#### 第四步：这里选你自己 fork 的仓库名称
+![第四步](4.png)
+
+#### 第五步：按图中填写，其他默认
+![第五步](5.png)
+
+#### 第六步：左侧找到 Workers KV 点击右侧新建
+![第六步](6.png)
+
+#### 第七步：空间名称填写 `CLOUDNAV_DB`（建议复制）
+![第七步](7.png)
+
+#### 第八步：绑定 KV 数据库
+回到刚才的 pages 设置页面找到绑定-右侧下滑找到 kv 命名空间，变量名称填写 `CLOUDNAV_KV`（建议复制）
+![第八步](8.png)
+
+#### 第九步：设置访问密码
+设置中找到变量和机密-填入 `PASSWORD`（建议复制）下面的值填入你自己要设置的密码，这一步是你登录导航页需要的登录密码
+![第九步](9.png)
+
+#### 第十步：添加自定义域名（可选项）
+![第十步](10.png)
+
+**🎉 所有设置结束后，请务必到部署页面点击“重新部署” (Create New Deployment)，项目即可正常使用！**
 
 ---
 
